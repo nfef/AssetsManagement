@@ -1,0 +1,60 @@
+.perfit-page-container{
+
+
+  .card-add-change-request{
+    margin: 2%;
+    border-radius: 8px !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    background: #fff;
+  }
+}
+
+.pages__demandes__liste__header{
+  display: flex;
+  align-items: center;
+  height: 56px;
+  background-color: #FF7900;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  color: #fff;
+
+  .p-input-icon-left{
+    color: #98A2B3;
+
+    input{
+      width:  350px !important;
+      min-width: 350px !important;
+      max-width: 350px !important;
+    }
+  }
+}
+
+.btn__actions{
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #fff;
+  margin-left: 15px !important;
+  button{
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 20px !important;
+    min-width: 35px !important;
+    margin-right: 2px;
+    color: #fff;
+  }
+  span{
+    margin-right: 0px !important;
+  }
+  svg{
+    font-size: 20px;
+    
+  }
+
+  
+}

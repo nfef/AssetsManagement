@@ -1,0 +1,55 @@
+.http-error{
+  height: 100%;
+  width: 100%;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.http-error-403 *{
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  font-family:  Helvetica;
+  position: absolute;
+}
+
+.http-error h1 {
+  top: 50%;
+  font-size: 224px;
+  font-weight: 900;
+  margin-left: -12px;
+  color: #eee;
+  text-transform: uppercase;
+  text-shadow: -2px -2px 0 #333, 2px 2px 0 #ff7900;
+  letter-spacing: -20px;
+}
+
+.http-error  h2 {
+  right: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #7b240c;
+  text-transform: uppercase;
+  text-shadow: 0 2px 0 #aaa;
+  letter-spacing: 5px;
+  top: 42%;
+}
+
+.http-error h4{
+  font-size: 18px;
+  color: #888;
+  top: 67%;
+}
+
+.http-error button{
+  font-size: 18px;
+  color: #888;
+  top: 77%;
+}
+
+.http-error span{
+  font-size: 14px;
+  color: #555;
+  top: 70%;
+}

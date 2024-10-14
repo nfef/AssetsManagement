@@ -1,0 +1,48 @@
+.text-editor-container{
+  border: 0px solid #fff;
+}  
+.text-editor-wrapper{
+  margin: 15px 0px;
+  border: 2px solid #ff9900;
+  border-radius: 8px;
+  padding: 3px;
+  >div{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 3px;
+  }
+
+}
+
+.DraftEditor-root,
+.text-editor-content{
+  height: 274px !important;
+}
+.text-editor-content{
+  height: 274px !important;
+  padding: 0px 5px;
+}
+.public-DraftStyleDefault-block{
+  margin: 0px;
+}
+
+._wrapperClassName{
+  margin: 15px 0px;
+  border: 2px solid #ff9900;
+  border-radius: 8px;
+  padding: 3px;
+  >div{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 3px;
+  }
+
+}
+
+.public-DraftEditor-content,
+.DraftEditor-root,
+.DraftEditor-editorContainer{
+  z-index: 0 !important;
+  position:  relative !important;
+}
+.react-select-3-listbox{
+  z-index: 10000;
+}

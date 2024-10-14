@@ -1,0 +1,155 @@
+.invf-main-form{
+  width: 820px;
+}
+
+
+
+
+.form-field:not(.col-12){
+  min-width: 47.5% !important;
+  max-width: 47.5% !important;
+  
+  text-align: left;
+  height: 100px !important;
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+  margin-bottom: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.form-field .p-calendar input,
+.form-field .p-calendar{
+  width: 100% !important;
+  
+}
+
+.form-field .p-calendar{
+  padding: 0px;
+}
+
+.form-field.ml5{
+  margin-left: 5%;
+}
+
+
+
+
+.invf-form-submit button:focus-visible{
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.invf-is-invalid{
+  border: 1px solid #CD3C14 !important;
+  border-radius: 4px;
+}
+.form-field>div .field-error{
+  font: 500 20px/1.2 "Helvetica Neue", Helvetica, Arial, serif;
+  font-size: 12px;
+  margin-top: 0px;
+  border-radius: 4px;
+  color: #CD3C14 !important;
+  padding: 5px 0px;
+}
+.form-field>div .text-danger>svg{
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 16px;
+  margin-top: -5px;
+}
+
+.form-field-is-invalid{
+  background: #CD3C14;
+  border-radius: 4px;
+}
+
+.invf-body-container{
+  height: calc(100vh - 145px);
+  display: flex;
+}
+
+
+
+.form-field {
+  display: flex;
+  margin-top: 5%;
+  flex-direction: row;
+  gap: 5px;
+}
+.form-field >label{
+  width: 150px;
+ 
+  font-size: 12px;
+}
+.form-field >div{
+  width: 400px;
+}
+.text-danger{
+  color: red !important;
+}
+
+.form-field .form-control{
+  font-weight: 500;
+  color: #555;
+  height: 37px;
+  border: 1px solid #ccc;
+}
+
+.form-field .form-control:hover{
+  border: 1px solid #ff6600;
+}
+
+
+.checkbox{
+  accent-color: #ff6600;
+  height: 15px !important;
+}
+
+.editable-span{
+  border: 1px solid transparent;
+  padding: 2px;
+}
+.editable-span:hover{
+  border: 1px solid #ccc;
+}
+
+.mini-save-btn{
+  color: #616989;
+  border: none;
+  background-color: transparent;
+
+}
+/* .w-100.form-field *{
+  width: 100% !important;
+  min-width: none;
+  max-width: none;
+} */
+.form-date{
+  background-color: #fff !important;
+}
+
+.bg-white .css-2wv4rj-control{
+  background-color: #fff;
+  width: 100% !important;
+}
+.bg-white .css-vcmabv-control{
+  background-color: #fff;
+  width: 100% !important;
+}
+.text-sm{
+  font-size: 12px;
+}
+
+.form-checkbox{
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  align-items: center;
+  padding-top: 20px;  
+}
+
+.detail-file{
+  margin-left: 15px;
+}
+
+
