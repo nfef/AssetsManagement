@@ -49,22 +49,22 @@ export function InventoryListTable({ queryFilter }: InventoryListTableProps) {
     //     header: "InventoryId",
     //     maxSize: 50
     // },
-    {
-        accessorKey: "assetId",
-        id: "assetId", // id required if you use accessorFn instead of accessorKey
-        header: "AssetId",
-        maxSize: 50
-    },
-    {
-        accessorKey: "floorId",
-        id: "floorId", // id required if you use accessorFn instead of accessorKey
-        header: "FloorId",
-        maxSize: 50
-    },
+    // {
+    //     accessorKey: "assetId",
+    //     id: "assetId", // id required if you use accessorFn instead of accessorKey
+    //     header: "AssetId",
+    //     maxSize: 50
+    // },
+    // {
+    //     accessorKey: "floorId",
+    //     id: "floorId", // id required if you use accessorFn instead of accessorKey
+    //     header: "FloorId",
+    //     maxSize: 50
+    // },
     {
         accessorKey: "inventoryDate",
         id: "inventoryDate", // id required if you use accessorFn instead of accessorKey
-        header: "InventoryDate",
+        header: "Date Inventaire",
         maxSize: 50
     },
       {
@@ -73,7 +73,7 @@ export function InventoryListTable({ queryFilter }: InventoryListTableProps) {
           data={originalRow}
           consultUrl={`/inventories/consult/${originalRow.id}`}
           editUrl={`/inventories/edit/${originalRow.id}`}
-          deleteData={ deleteInventory }  
+          // deleteData={ deleteInventory }  
           />
         }, //alternate way
         id: 'action', //id required if you use accessorFn instead of accessorKey

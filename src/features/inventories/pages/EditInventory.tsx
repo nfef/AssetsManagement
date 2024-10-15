@@ -8,7 +8,8 @@ const EditInventory = () => {
   const { data: inventory } = useGetInventory(id); 
 
   return (
-    <div className="card-add-change-request"> <InventoryForm inventoryId={id}  inventoryData={inventory} /></div>
+    // <div className="card-add-change-request"> <InventoryForm inventoryId={id}  inventoryData={inventory} /></div>
+    <div className="card-add-change-request"> <InventoryForm  inventoryData={inventory} /></div>
   );
 }
 export { EditInventory };

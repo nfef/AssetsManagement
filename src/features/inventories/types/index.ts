@@ -9,21 +9,17 @@ export interface QueryParams {
 
 export interface InventoryDto {
   id: string;
-  assetId: number;
-  floorId: number;
   inventoryDate: Date;
 }
 
 export interface InventoryForCreationDto {
 
-  assetId: number;
-  floorId: number;
+ 
   inventoryDate: Date;
 }
 export interface InventoryForUpdateDto {
 
-  assetId: number;
-  floorId: number;
+  
   inventoryDate: Date;
 }
 
