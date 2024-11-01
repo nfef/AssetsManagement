@@ -9,18 +9,26 @@ export interface QueryParams {
 
 export interface InventoryDto {
   id: string;
-  inventoryDate: Date;
+  createdAt?: Date;
 }
 
 export interface InventoryForCreationDto {
 
  
-  inventoryDate: Date;
+  createdAt?: Date;
 }
 export interface InventoryForUpdateDto {
 
   
-  inventoryDate: Date;
+  createdAt: Date;
+}
+
+export interface InventoryItemDto {
+  id: string;
+  inventoryId: string;
+  assetId: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 // need a string enum list?

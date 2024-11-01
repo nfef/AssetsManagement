@@ -5,9 +5,11 @@ import { ListFloors, ConsultFloor, NewFloor, EditFloor } from "./features/floors
 import { ListAssetTypes, ConsultAssetType, NewAssetType, EditAssetType } from "./features/assetTypes";
 import { ListAssets, ConsultAsset, NewAsset, EditAsset } from "./features/assets";
 import { ListInventories, ConsultInventory, NewInventory, EditInventory } from "./features/inventories";
+import LoginPage from "./features/login/loginPage";
 
 
 const routes: RouteObject[] = [
+  { action: "read", entity: "User", to: '/login', element: LoginPage},
   { action: "read", entity: "Company", to: '/list/companies', element: ListCompanies},
 { action: "add", entity: "Company", to: '/companies/new', element: NewCompany},
 { action: "update", entity: "Company", to: '/companies/edit/:id', element: EditCompany},

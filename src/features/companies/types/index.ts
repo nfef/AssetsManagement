@@ -12,17 +12,22 @@ export interface CompanyDto {
   
   code: string;
   name: string;
+  logo?: File | null;
+
 }
 
 export interface CompanyForCreationDto {
   
   code: string;
   name: string;
+  logo?: File | null;
 }
 export interface CompanyForUpdateDto {
   
   code: string;
   name: string;
+  logo?: File | null;
+
 }
 
 // need a string enum list?

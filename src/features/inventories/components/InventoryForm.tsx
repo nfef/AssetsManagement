@@ -16,13 +16,14 @@ import { FiEye, FiSave } from "react-icons/fi";
 import { FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
+import { clients } from "../../../lib/axios";
 
 interface InventoryFormProps {
-  inventoryId?: number;
+  id?: number;
   inventoryData?: InventoryDto;
 }
 
-function InventoryForm({ inventoryId, inventoryData }: InventoryFormProps) {
+function InventoryForm({ id, inventoryData }: InventoryFormProps) {
   const navigate = useNavigate();
   const [scannedBarcodes, setScannedBarcodes] = useState<string[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,41 +39,55 @@ function InventoryForm({ inventoryId, inventoryData }: InventoryFormProps) {
       }
     };
 
+    const initialValuesItems: InventoryForCreationDto = {
+      
+      // Add other necessary fields here
+    };
+
   const handleModalOpen = () => setIsModalOpen(true);
   const handleModalClose = () => setIsModalOpen(false);
+  const createInventoryApi = useAddInventory();
+ 
+  function createInventory(data: InventoryForCreationDto, formikHelpers: FormikHelpers<InventoryForCreationDto>) {
+    createInventoryApi
+      .mutateAsync(data)
+      .then((reponse) => {
+        console.log("reponse", reponse);
+        const inventoryId = reponse.id;
 
-  // const createInventory = async (data: InventoryForCreationDto, formikHelpers: FormikHelpers<InventoryDto>) => {
-  //   try {
-  //     const inventory = await createInventoryApi.mutateAsync(data);
-  //     Notifications.success("Inventory created successfully");
+        Notifications.success("Inventory created successfully");
 
-  //     // Enregistrer les items d'inventaire
-  //     for (const barcode of scannedBarcodes) {
-  //       await addInventoryItem(inventory.id, barcode);
-  //     }
+        //enregistrer les items d'inventaire
+        const addItemsPromises = scannedBarcodes.map((barcode) => 
+          addInventoryItem(inventoryId, barcode)
+      )
 
-  //     navigate("/inventories");
-  //   } catch (e) {
-  //     Notifications.error("There was an error creating the inventory");
-  //     console.error(e);
-  //     formikHelpers.setSubmitting(false);
-  //   }
-  // };
-
-  const createInventory = () => {
-    console.log('click sur le bouton')
+        return Promise.all(addItemsPromises);
+      })
+      .then(() => {
+        navigate("/list/inventories")
+      })
+      .catch((e) => {
+        Notifications.error("There was an error creating the inventory");
+        console.error(e);
+        formikHelpers.setSubmitting(false);
+      });
   }
 
-  // const addInventoryItem = async (inventoryId: number, barcode: string) => {
-  //   const axios = await clients();
-  //   return axios.post(`/api/inventories/${inventoryId}/items`, { barcode });
-  // };
+
+  const addInventoryItem = async (inventoryId: string, barcode: string) => {
+    const axios = await clients();
+    return axios.post(`/api/inventories/${inventoryId}/items`, { barcode });
+  };
 
   return (
     <Formik
-      initialValues={inventoryData || { inventoryId: '', assetId: '', floorId: '', inventoryDate: '' }}
+      initialValues={{
+        id: inventoryData?.id ?? "",
+        inventoryDate: inventoryData?.createdAt ? new Date(inventoryData.createdAt) : new Date(),
+      } as InventoryForCreationDto}
       validationSchema={inventoryValidationSchema}
-      onSubmit={createInventory}
+      onSubmit={(values, formikHelpers) => createInventory(values as InventoryForCreationDto, formikHelpers)}
     >
       {({ isSubmitting }) => (
         <Form>

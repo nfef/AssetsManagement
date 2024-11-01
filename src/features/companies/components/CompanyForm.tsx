@@ -28,6 +28,7 @@ interface CompanyFormProps {
 function CompanyForm({ companyId, companyData }: CompanyFormProps) {
 
   const navigate = useNavigate();
+  const [logoFile, setLogoFile] = useState<File | null>(null);
 
   const [company, setCompany] = useState({
   // companyId:companyData?.companyId??0,
@@ -46,40 +47,56 @@ name:companyData?.name??"",
   };
 
   const createCompanyApi = useAddCompany();
-  function createCompany(data: CompanyForCreationDto, formikHelpers: FormikHelpers<CompanyDto>) {
-    createCompanyApi
-      .mutateAsync(data)
-      .then(() => {
+  async function createCompany(data: CompanyForCreationDto, formikHelpers: FormikHelpers<CompanyDto>) {
+    const formData = new FormData();
+    formData.append("code", data.code);
+    formData.append("name", data.name);
+    if (logoFile) {
+      formData.append("logo", logoFile);
+    }
+      try {
+        await createCompanyApi.mutateAsync(formData);
         Notifications.success("Company created successfully");
-      })
-      .then(() => {
-        navigate("/list/companies")
-      })
-      .catch((e) => {
+        navigate("/list/companies");
+      } catch (e) {
         Notifications.error("There was an error creating the company");
         console.error(e);
         formikHelpers.setSubmitting(false);
-      });
-  }
+      }
+    }
 
   const updateCompanyApi = useUpdateCompany();
-  function updateCompany(data: CompanyForUpdateDto, formikHelpers: FormikHelpers<CompanyDto>) {
+  async function updateCompany(data: CompanyForUpdateDto, formikHelpers: FormikHelpers<CompanyDto>) {
     const id = companyId;
     if (id === null || id === undefined) return;
 
-    updateCompanyApi
-      .mutateAsync({ id, data })
-      .then(() => {
-        Notifications.success("Company updated successfully");
-      })
-      .then(() => {
-        navigate("/list/companies");
-      })
-      .catch((e) => {
-        Notifications.error("There was an error updating the Company");
-        console.error(e);
-        formikHelpers.setSubmitting(false);
-      });
+    const formData = new FormData();
+    formData.append("code", data.code);
+    formData.append("name", data.name);
+    if (logoFile) {
+      formData.append("logo", logoFile);
+    }
+
+    try {
+      await updateCompanyApi.mutateAsync({ id, data:formData });
+      Notifications.success("Company updated successfully");
+      navigate("/list/companies");
+    } catch (e) {
+      Notifications.error("There was an error updating the Company");
+      console.error(e);
+      formikHelpers.setSubmitting(false);
+    }
+  }
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files || files.length === 0) {
+      setLogoFile(null);
+      return;
+    }
+
+    const file = files[0];
+    setLogoFile(file);
   }
 
   return (
@@ -110,6 +127,19 @@ name:companyData?.name??"",
                     <div className="col-12 col-md-6  mt-4">
                       <FormFieldInput name="name"  label="Name" required/>
                     </div>       
+                    </div>
+                    <div className="row mb-4">
+                      <div className="col-12 col-md-6">
+                        <label htmlFor="logo" className="form-label">Logo</label>
+                        <input
+                          type="file"
+                          id="logo"
+                          name="logo"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                          className="form-control"
+                        />
+                        </div>
                     </div>
                   </div>    
                 </div> 

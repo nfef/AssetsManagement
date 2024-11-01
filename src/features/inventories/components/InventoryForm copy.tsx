@@ -22,10 +22,10 @@ import { useState, useEffect } from "react";
 
 interface InventoryFormProps {
   inventoryId?: string | undefined;
-  inventoryData?: InventoryDto;
+  createdAt?: InventoryDto;
 }
 
-function InventoryForm({ inventoryId, inventoryData }: InventoryFormProps) {
+function InventoryForm({ inventoryId, createdAt }: InventoryFormProps) {
 
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ function InventoryForm({ inventoryId, inventoryData }: InventoryFormProps) {
   // inventoryId:inventoryData?.inventoryId??0,
 // assetId:inventoryData?.assetId??0,
 // floorId:inventoryData?.floorId??0,
-inventoryDate:inventoryData?.inventoryDate??"",
+createdAt: createdAt?.createdAt??"",
 
   } as InventoryDto);
 

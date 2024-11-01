@@ -8,6 +8,8 @@ import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import TableAction from "../../../components/Table/TableAction";
 import { selectPageSize } from "../../../app/PageSlice";
+import moment from 'moment';
+import { download } from "../../../utils/download";
 
 interface InventoryListTableProps {
   queryFilter?: string | undefined;
@@ -17,7 +19,7 @@ export function InventoryListTable({ queryFilter }: InventoryListTableProps) {
   const [pageNumber, setPageNumber] = useState(1);
   const pageSize = useSelector(selectPageSize);
 
-  
+
   const deleteInventoryApi = useDeleteInventory();
   function deleteInventory(id: string) {
     deleteInventoryApi
@@ -40,64 +42,79 @@ export function InventoryListTable({ queryFilter }: InventoryListTableProps) {
   });
   const inventoryData = inventoryResponse?.data;
   const inventoryPagination = inventoryResponse?.pagination;
+  console.log('inventoryData', inventoryData);
+
+  const printReport = (id: string) => {
+    // window.open(`/api/inventories/${id}/report`, '_blank');
+    const url = `/api/inventories/${id}/report`;
+    const filename = `inventory_report_${id}.pdf`;
+    download(url, filename);
+  };
 
   const columns = useMemo<MRT_ColumnDef<InventoryDto>[]>(
     () => [
-    // {
-    //     accessorKey: "inventoryId",
-    //     id: "inventoryId", // id required if you use accessorFn instead of accessorKey
-    //     header: "InventoryId",
-    //     maxSize: 50
-    // },
-    // {
-    //     accessorKey: "assetId",
-    //     id: "assetId", // id required if you use accessorFn instead of accessorKey
-    //     header: "AssetId",
-    //     maxSize: 50
-    // },
-    // {
-    //     accessorKey: "floorId",
-    //     id: "floorId", // id required if you use accessorFn instead of accessorKey
-    //     header: "FloorId",
-    //     maxSize: 50
-    // },
-    {
-        accessorKey: "inventoryDate",
+      {
+        accessorKey: "id",
+        header: "#ID",
+      },
+      // {
+      //     accessorKey: "assetId",
+      //     id: "assetId", // id required if you use accessorFn instead of accessorKey
+      //     header: "AssetId",
+      //     maxSize: 50
+      // },
+      // {
+      //     accessorKey: "itemCount",
+      //     id: "floorId", // id required if you use accessorFn instead of accessorKey
+      //     header: "FloorId",
+      //     maxSize: 50
+      // },
+      {
+        accessorKey: "createdAt",
         id: "inventoryDate", // id required if you use accessorFn instead of accessorKey
         header: "Date Inventaire",
-        maxSize: 50
-    },
+        maxSize: 50,
+        Cell: ({ cell }) => {
+          const date = cell.getValue<string>();
+          return moment(date).format('DD/MM/YYYY');
+        }
+      },
       {
         accessorFn: (originalRow) => {
-          return <TableAction 
-          data={originalRow}
-          consultUrl={`/inventories/consult/${originalRow.id}`}
-          editUrl={`/inventories/edit/${originalRow.id}`}
-          // deleteData={ deleteInventory }  
-          />
+          return (
+            <div>
+              {/* <TableAction
+                data={originalRow}
+                // consultUrl={`/inventories/consult/${originalRow.id}`}
+                // editUrl={`/inventories/edit/${originalRow.id}`}
+              // deleteData={ deleteInventory }  
+              /> */}
+              <button onClick={() => printReport(originalRow.id)}>Imprimer le rapport</button>
+            </div>
+          );
         }, //alternate way
         id: 'action', //id required if you use accessorFn instead of accessorKey
         header: 'Action',
         Header: "Action", //optional custom markup
         maxSize: 50
       }
-  ],[]);
+    ], []);
 
   return (
 
-<>
-    <div style={{
-        maxHeight:"calc(100vh - 260px)",
+    <>
+      <div style={{
+        maxHeight: "calc(100vh - 260px)",
         minHeight: "calc(100vh - 260px)",
         borderBottom: "1px solid #ccc"
-        }} className="tiny-scroll">
-        <MantineReactTable 
-          
+      }} className="tiny-scroll">
+        <MantineReactTable
+
           enableFullScreenToggle={false}
           enablePagination={false}
           enableBottomToolbar={false}
           columns={columns}
-          data={inventoryData??[]}
+          data={inventoryData ?? []}
           enableRowSelection={false} //enable some features
           enableColumnOrdering={false}
           enableGlobalFilter={false} //turn off a feature
@@ -108,26 +125,26 @@ export function InventoryListTable({ queryFilter }: InventoryListTableProps) {
           enableHiding={false}
           initialState={{ density: 'xs' }}
           enableStickyHeader={true}
-          state={{isLoading:isLoading}}
+          state={{ isLoading: isLoading }}
           mantineTableContainerProps={{
-            sx:{ maxHeight: 'calc(100vh - 265px)', minHeight:"200px", overflow: "auto !important" },
-            className:"tiny-scroll"
+            sx: { maxHeight: 'calc(100vh - 265px)', minHeight: "200px", overflow: "auto !important" },
+            className: "tiny-scroll"
           }}
-          
+
           mantineTableBodyCellProps={{
-            sx:{padding:"0px !important"}
+            sx: { padding: "0px !important" }
           }}
-          
+
         />
       </div>
-        
+
       <PaginationControls
         pageNumber={pageNumber}
         totalPages={inventoryPagination?.totalPages}
         onPageNumberChange={setPageNumber}
-        // onPageSizeChange={setPageSize}
-        // pageSize={pageSize}
-      /> 
+      // onPageSizeChange={setPageSize}
+      // pageSize={pageSize}
+      />
     </>
   );
 }

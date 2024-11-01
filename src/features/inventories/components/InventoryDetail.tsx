@@ -26,7 +26,7 @@ function InventoryDetail({ data }: InventoryFormProps) {
                       <FieldDetail value={data?.floorId}  label="FloorId" />
                     </div> */}
                     <div className="col-12 col-md-6  mt-4">
-                      <FieldDetail value={data?.inventoryDate}  label="InventoryDate" />
+                      <FieldDetail value={data?.createdAt}  label="InventoryDate" />
                     </div>       
         </div>   
     </div>

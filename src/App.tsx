@@ -90,15 +90,26 @@ function App() {
       {/* {isAuthentificated && !unauthorized(keycloak) && */}
 
       <React.StrictMode>
-        <PrivateLayout>
-          <Routes>
+      <Routes>
             {routes.map((route) => (
               // <Route path={route.to} element={ ability.can(route.action, route.entity) ? <route.element />: <Error403 />} key={route.to}></Route>
-              <Route path={route.to} element={<route.element />} key={route.to}></Route>
+              <Route 
+                path={route.to} 
+                element={ 
+                  route.to === "/login" ? (
+                    <route.element />
+                  ) : (
+                    <PrivateLayout>
+                      <route.element />
+                    </PrivateLayout>
+                  )
+              } 
+                key={route.to}>
+
+                </Route>
             ))}
             <Route path={"*"} element={<Error404 />} ></Route>
           </Routes>
-        </PrivateLayout>
       </React.StrictMode>
       {/* } */}
 

@@ -3,14 +3,18 @@ import { AxiosError } from "axios";
 import { useMutation, UseMutationOptions, useQueryClient } from "react-query";
 import { CompanyForUpdateDto, CompanyKeys } from "../../companies";
 
-const updateCompany = async (id: string, data: CompanyForUpdateDto) => {
+const updateCompany = async (id: string, data: FormData) => {
   const axios = await clients();
-  return axios.put(`/api/companies/${id}`, data).then((response) => response.data);
+  return axios.put(`/api/companies/${id}`, data,{
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  }).then((response) => response.data);
 };
 
 export interface UpdateProps {
   id: string;
-  data: CompanyForUpdateDto;
+  data: FormData;
 }
 
 export function useUpdateCompany(

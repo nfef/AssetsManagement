@@ -54,7 +54,7 @@ const ListCompanies = () => {
               <Button
                 onClick={() => navigate("/companies/new")}
                 startIcon={<MdAdd /> }
-                children="Ajoouter une société"
+                children="Ajouter une société"
                 style={{
                   color:"#FF7900",
                   backgroundColor:"#fff !important",
